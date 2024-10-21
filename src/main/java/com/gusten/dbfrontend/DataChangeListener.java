@@ -1,5 +1,5 @@
 package com.gusten.dbfrontend;
 
 public interface DataChangeListener {
-    void onDataChange();
+    void onDataChanged(String tableName);
 }

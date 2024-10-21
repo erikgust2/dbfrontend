@@ -5,9 +5,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Employee {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class Employee implements DatabaseModel {
     private final IntegerProperty id;
     private final StringProperty name;
+
+    public Employee() {
+        this(0, "");
+    }
 
     public Employee(int id, String name) {
         this.id = new SimpleIntegerProperty(id);
@@ -34,4 +41,9 @@ public class Employee {
         return name;
     }
 
+    @Override
+    public void fromResultSet(ResultSet rs) throws SQLException {
+        this.id.setValue(rs.getInt("id"));
+        this.name.setValue(rs.getString("name"));
+    }
 }
